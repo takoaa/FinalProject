@@ -1,0 +1,42 @@
+<div *ngIf="isVisible">
+    <div class="container">
+        <div class="product-list">
+            <h3>Liste des Formes Disponibles</h3>
+            <button (click)="openDialog()" class="ajouter">Ajouter Forme</button>
+
+            <table>
+                <thead>
+                    <tr class="attributs">
+                        <th class="nom">Nom</th>
+                        <th class="description">Description</th>
+                        <th class="image">Image</th>
+                        <th colspan="3">Actions</th> <!-- Specify the correct number of columns -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="formes$ | async as formes; else noData">
+                        <ng-container *ngIf="formes$ | async as formes; else noData">
+                            <tr *ngFor="let forme of formes" class="attributs">
+                                <td>{{ forme.nom }}</td>
+                                <td>{{ forme.description }}</td>
+                                <td>
+                                    <img *ngIf="forme.image" [src]="forme.image" alt="{{ forme.nom }} image" width="50">
+                                </td>
+                                <td colspan="2"> <!-- Actions are now grouped in a single column -->
+                                    <button class="modifier">Modifier</button>
+                                    <button class="supprimer">Supprimer</button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #noData>
+                        <tr>
+                            <td colspan="6">Aucune forme disponible.</td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+/* Global font style */
+body {
+  font-family: 'Roboto', sans-serif; /* Sets Roboto as the primary font for the body */
+}
+/* .main-container {
+  display: flex;
+  .side-nav {
+    width: 350px;
+    min-width: 230px;
+    min-height: calc(100vh - 70px);
+    background-color: #cd0429;
+    color: #fff;
+    
+    box-shadow: 5px 5px 5px #939393;
+    @media only screen and (max-width: 1300px) {
+      width: 100px;
+      min-width: 100px;
+    }
+  }
+  .main {
+    padding: 30px;
+  }
+} */
+/* Flex container for general alignment */
+.container {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+/* Navigation bar styles */
+.navbar {
+  background-color: #ffffff; /* Light background */
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #000000 !important;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  align-items: center;
+  padding-left: 0;
+
+  font-size: 1rem;
+
+}
+
+.nav-item {
+  margin-right: 1rem; /* Space between navigation items */
+}
+
+.nav-link {
+  color: #000000 !important; /* Dark text for better visibility */
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #1abc9c !important; /* Teal color on hover/focus */
+}
+
+/* Responsive adjustments for mobile views */
+@media (max-width: 576px) {
+  .navbar-nav {
+    flex-direction: column; /* Stack items vertically on small screens */
+  }
+
+  .nav-item {
+    margin-right: 0; /* No horizontal margin on small screens */
+    margin-bottom: 0.5rem; /* Adds vertical spacing between items */
+  }
+}

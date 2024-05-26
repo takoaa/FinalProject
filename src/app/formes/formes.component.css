@@ -1,0 +1,87 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #fffefe; /* Check for correct color visibility */
+    border-radius: 20px;
+}
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    margin: 23px;
+    padding: 23px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+    width: 100%; /* Ensure this does not collapse to zero width */
+    max-width: 700px;
+    min-height: 200px; 
+}
+
+.product-list:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+h3 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%; /* Ensure full width within container */
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+li:hover {
+    background-color: #eaeaea;
+}
+
+.attributs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px; /* Ensure there's space between columns */
+    color: #857d7d;
+}
+
+.nom:hover, .epaisseur:hover {
+    text-decoration: underline;
+    color: #1d56ff;
+}
+
+.modifier:hover, .supprimer:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+    font-size: 15px;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+    border: none;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    transition: background-color 0.2s ease;
+}
+
+.ajouter {
+    background-color: #68d456;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px 0;
+    width: 150px;
+    height: 40px;
+}

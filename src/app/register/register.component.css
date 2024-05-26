@@ -1,0 +1,72 @@
+/* register.component.scss */
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    margin-top: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+
+    label {
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        transition: border-color 0.15s ease-in-out;
+    }
+
+    input:focus {
+        border-color: #5d89a2;
+        outline: 0;
+      
+    }
+
+    .text-danger {
+        color: #242424;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: #5d89a2;
+    border-color: #5d89a2;
+}
+
+.btn-primary:hover {
+    background-color: #5d89a2;
+    border-color: #5d89a2;
+}
+
+.btn-primary:disabled,
+.btn-primary.disabled {
+    background-color: #5d89a2;
+    border-color: #5d89a2;
+}
+
+.form-group .text-danger {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+}

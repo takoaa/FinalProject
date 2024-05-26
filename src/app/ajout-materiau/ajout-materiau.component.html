@@ -1,0 +1,89 @@
+<div class="product-form">
+    <h2>Ajouter un nouveau Matériau</h2>
+    <form (ngSubmit)="submitForm(form)" #form="ngForm">
+        <mat-dialog-content class="form-content">
+            <div class="form-field">
+                <label>Nom Complet du Matériau</label>
+                <mat-form-field appearance="fill">
+                    <input matInput [(ngModel)]="data.materiau['name']" name="name" required>
+                    <mat-error *ngIf="form.submitted && form.controls['name']?.invalid">Ce champ est requis</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <label>Catégorie du Matériau</label>
+                <mat-form-field appearance="fill">
+                    <input matInput [(ngModel)]="data.materiau['type']" name="type" required>
+                    <mat-error *ngIf="form.submitted && form.controls['type']?.invalid">Ce champ est requis</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <label>Épaisseur en Millimètres (mm)</label>
+                <mat-form-field appearance="fill">
+                    <input matInput [(ngModel)]="data.materiau['thicknessOptions']" name="thickness" required
+                        type="number" max="100" #thickness="ngModel">
+                    <mat-error *ngIf="form.submitted && thickness.errors?.['required']">Ce champ est requis</mat-error>
+                    <mat-error *ngIf="form.submitted && thickness.errors?.['max']">L'épaisseur maximale est de 100
+                        mm</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-field">
+                <label>Niveau de Brillance</label>
+                <mat-form-field appearance="fill">
+                    <input matInput [(ngModel)]="data.materiau['brilliance']" name="brilliance" required>
+                    <mat-error *ngIf="form.submitted && form.controls['brilliance']?.invalid">Ce champ est
+                        requis</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <label>Unité de Mesure Utilisée</label>
+                <mat-form-field appearance="fill">
+                    <input matInput [(ngModel)]="data.materiau['unit']" name="unit" required>
+                    <mat-error *ngIf="form.submitted && form.controls['unit']?.invalid">Ce champ est requis</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <label>Propriétés Physiques ou Chimiques</label>
+                <mat-form-field appearance="fill">
+                    <input matInput [(ngModel)]="data.materiau['characteristics']" name="characteristics" required>
+                    <mat-error *ngIf="form.submitted && form.controls['characteristics']?.invalid">Ce champ est
+                        requis</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <label>Code Tarifaire</label>
+                <mat-form-field appearance="fill">
+                    <input matInput [(ngModel)]="data.materiau['codeTar']" name="codeTar" required
+                        pattern="^[a-zA-Z0-9]{4,10}$" minlength="4" maxlength="10" #codeTar="ngModel">
+                    <mat-error *ngIf="form.submitted && codeTar.invalid">Le code tarifaire est requis, doit être
+                        alphanumérique, et comporter entre 4 et 10 caractères</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <label>Options de Finition de la Surface Visible</label>
+                <mat-form-field appearance="fill">
+                    <input matInput type="number" [(ngModel)]="data.materiau.faceOptions" name="faceOptions" required
+                        min="1" max="2" placeholder="Nombre de faces">
+                    <mat-error *ngIf="form.submitted && form.controls['faceOptions']?.invalid">
+                        Ce champ est requis
+                    </mat-error>
+                    <mat-hint>Entrer 1 ou 2 (pour 1 face ou 2 faces)</mat-hint>
+                </mat-form-field>
+            </div>
+
+        </mat-dialog-content>
+
+        <mat-dialog-actions align="end">
+
+            <button mat-raised-button color="primary" type="submit">Ajouter</button>
+            <button mat-button (click)="closeDialog()">Annuler</button>
+        </mat-dialog-actions>
+    </form>
+</div>

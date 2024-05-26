@@ -1,0 +1,35 @@
+<div class="app-container">
+  <div class="nav-items">
+    <div class="nav-item">
+      <fa-icon [icon]="faTachometerAlt"></fa-icon>
+      <span (click)="navigateToDashboard()">Tableau de bord</span>
+    </div>
+
+    <!-- Configuration menu item -->
+    <div class="nav-item" (click)="toggleChildren($event)">
+      <fa-icon [icon]="faCog"></fa-icon> <span>Configurations</span>
+      <div *ngIf="showChildren" class="btn">
+        <button class="nav-child" (click)="toggleSubmenu($event, 'workplan'); $event.stopPropagation()">
+          <fa-icon [icon]="faWrench"></fa-icon> Plan de travail
+        </button>
+        <div *ngIf="showSubmenu['workplan']">
+          <a class="nav-child btn" (click)="navigate('/matiere', $event)">
+            <fa-icon [icon]="faCircle"></fa-icon> Matière
+          </a>
+          <!-- <a routerLink="/Formes" class="nav-child btn" (click)="$event.stopPropagation()">
+            <fa-icon [icon]="faShapes"></fa-icon> Formes
+          </a> -->
+
+        </div>
+      </div>
+    </div>
+    <div class="nav-item">
+      <fa-icon [icon]="faChartLine"></fa-icon> <span>Statistique</span>
+    </div>
+    <!-- Additional navigation items -->
+    <div class="nav-item">
+      <fa-icon [icon]="faPhone"></fa-icon> <span>Contact</span>
+    </div>
+
+  </div>
+</div>

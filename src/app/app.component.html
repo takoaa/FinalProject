@@ -1,0 +1,30 @@
+<body>
+  <div class="app-container">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" (click)="navigateToDashboard()">
+          <fa-icon [icon]="faHome"></fa-icon>
+        </a>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register">
+              <fa-icon [icon]="faUserPlus"></fa-icon> S'inscrire
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
+            <a class="nav-link" routerLink="/login">
+              <fa-icon [icon]="faSignInAlt"></fa-icon> Se Connecter
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="isLoggedIn$ | async">
+            <a class="nav-link" (click)="logout()">
+              <fa-icon [icon]="faSignOutAlt"></fa-icon> Se déconnecter
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <router-outlet></router-outlet>
+  </div>
+</body>
