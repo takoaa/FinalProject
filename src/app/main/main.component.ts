@@ -46,7 +46,7 @@ export class MainComponent {
     },
     yAxis: {
       title: {
-        text: 'Revenue in $'
+        text: 'Revenue en $'
       }
     },
     series: [
@@ -65,7 +65,7 @@ export class MainComponent {
         ]
       },
       {
-        name: 'Porte fenêtre',
+        name: 'Porte-fenêtre',
         type: 'line',
         color: '#ed9e20',
         data: [

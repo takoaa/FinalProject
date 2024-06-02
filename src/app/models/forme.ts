@@ -1,7 +1,8 @@
-export interface Forme {
-    id?: string;
-    nom: string;
-    description: string;
- 
-    image?: File | null;
-}
+
+    export interface Forme {
+        id?: number;
+        name: string;
+        image?: File | null; // Allow null and undefined
+      }
+      
+  

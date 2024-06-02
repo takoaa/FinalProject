@@ -10,16 +10,29 @@
       <fa-icon [icon]="faCog"></fa-icon> <span>Configurations</span>
       <div *ngIf="showChildren" class="btn">
         <button class="nav-child" (click)="toggleSubmenu($event, 'workplan'); $event.stopPropagation()">
-          <fa-icon [icon]="faWrench"></fa-icon> Plan de travail
+          Plan de travail
         </button>
         <div *ngIf="showSubmenu['workplan']">
           <a class="nav-child btn" (click)="navigate('/matiere', $event)">
-            <fa-icon [icon]="faCircle"></fa-icon> Matière
+            <fa-icon [icon]="faCircle"></fa-icon> Matériaux
           </a>
-          <!-- <a routerLink="/Formes" class="nav-child btn" (click)="$event.stopPropagation()">
+          <a class="nav-child btn" (click)="$event.stopPropagation()">
             <fa-icon [icon]="faShapes"></fa-icon> Formes
-          </a> -->
-
+          </a>
+          <a class="nav-child btn" (click)="$event.stopPropagation()">
+            <fa-icon [icon]="faPalette "></fa-icon> Décors
+          </a>
+        </div>
+        <div>
+          <button class="nav-child">
+            Fenêtre
+          </button>
+          <button class="nav-child">
+            Porte Fenêtre
+          </button>
+          <button class="nav-child">
+            Varrière
+          </button>
         </div>
       </div>
     </div>

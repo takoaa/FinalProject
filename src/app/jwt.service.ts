@@ -19,6 +19,7 @@ const BASE_URL = 'http://localhost:8081/';
 })
 export class JwtService {
   private tokenKey = 'jwt';
+  router: any;
   isLoggedIn(): boolean {
     const token = this.getToken();
  
@@ -58,14 +59,17 @@ export class JwtService {
   }
 
   private createAuthorizationHeader(): HttpHeaders {
-    const jwtToken = localStorage.getItem('jwt');
+    const jwtToken = this.getToken();
     let headers = new HttpHeaders();
     if (jwtToken) {
       console.log("JWT token found in local storage:", jwtToken);
       headers = headers.set("Authorization", "Bearer " + jwtToken);
     } else {
-      console.log("JWT token not found in local storage");
+      console.log("JWT token not found in local storage, needs re-authentication");
+      // Implement logic to handle missing token, e.g., redirect to login
+      this.router.navigate(['/login']);
     }
     return headers;
   }
+  
 }

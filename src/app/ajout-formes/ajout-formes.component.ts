@@ -1,27 +1,42 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { FormesService} from '../formes.service';
+import { Component, Inject } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { FormesService } from '../formes.service';
+import { Forme } from '../models/forme';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-ajout-formes',
+  selector: 'app-ajout-forme',
   templateUrl: './ajout-formes.component.html',
-  styleUrl: './ajout-formes.component.css'
+  styleUrls: ['./ajout-formes.component.css']
 })
 export class AjoutFormesComponent {
-  isVisible: boolean = false;
+  selectedFile: File | null = null;
 
   constructor(
-    private formesService: FormesService, // Correct naming and ensure this service is correctly implemented
-    public dialogRef: MatDialogRef<AjoutFormesComponent>
-  ) { }
+    private formesService: FormesService,
+    public dialogRef: MatDialogRef<AjoutFormesComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { forme: Forme }
+  ) {}
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0] || null;
+    this.data.forme.image = this.selectedFile;
+  }
+
+  submitForm(form: NgForm): void {
+    if (form.valid) {
+      const operation = this.data.forme.id ?
+        this.formesService.updateForme(this.data.forme.id, this.data.forme) :
+        this.formesService.addForme(this.data.forme);
+
+      operation.subscribe({
+        next: () => this.dialogRef.close(true),
+        error: () => this.dialogRef.close(false)
+      });
+    }
+  }
 
   closeDialog(): void {
-    this.isVisible = false;
-    this.dialogRef.close(); // Close the dialog
-  }
-  submitForm(nom: string, description: string, image: File | null): void {
-    const forme = { nom, description, image };
-    this.formesService.addForme(forme); // Assuming addForme expects an object of type Forme
-    this.closeDialog();
+    this.dialogRef.close(false);
   }
 }

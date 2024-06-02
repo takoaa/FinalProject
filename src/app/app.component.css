@@ -77,3 +77,6 @@ body {
     margin-bottom: 0.5rem; /* Adds vertical spacing between items */
   }
 }
+.navbar-brand{
+  cursor: pointer;
+}

@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
         },
         (error: any) => {
           this.errorMessage = 'Compte existe.';
-          console.error('Registration failed:', error);
+         
         }
       );
     }

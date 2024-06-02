@@ -50,8 +50,8 @@ button {
 }
 
 .btn-primary {
-    background-color: #5d89a2;
-    border-color: #5d89a2;
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
 .btn-primary:hover {
@@ -61,8 +61,8 @@ button {
 
 .btn-primary:disabled,
 .btn-primary.disabled {
-    background-color: #5d89a2;
-    border-color: #5d89a2;
+    background-color: #007bff;;
+    border-color: #007bff;;
 }
 
 .form-group .text-danger {

@@ -5,18 +5,19 @@
             <button (click)="openDialog(createNewMateriau())" class="ajouter">Ajouter</button>
             <input type="file" (change)="onFileSelected($event)" />
             <button (click)="uploadFile()" class="Upload">Importer un fichier</button>
-            <table>
+            <table class="styled-table">
                 <thead>
                     <tr class="attributs">
                         <th class="nom">Nom</th>
+                        <th></th>
                         <th class="epaisseur">Epaisseur</th>
+
                         <th class="Type">Type</th>
                         <th class="Brillance">Brillance</th>
                         <th class="Unité">Unité</th>
                         <th class="Caractéristique">Caractéristique</th>
                         <th class="Code de tarif">Code de tarif</th>
                         <th>Face option</th>
-
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -24,13 +25,15 @@
                     <ng-container *ngIf="materiaux$ | async as materiaux; else noData">
                         <tr *ngFor="let materiau of materiaux" class="attributs">
                             <td>{{ materiau.name }}</td>
-                            <td>{{ materiau.thicknessOptions }}</td>
+                            <td>{{ materiau.thicknessOptions }}
+                            </td>
                             <td>{{ materiau.type }}</td>
                             <td>{{ materiau.brilliance }}</td>
                             <td>{{ materiau.unit }}</td>
                             <td>{{ materiau.characteristics }}</td>
                             <td>{{ materiau.codeTar }}</td>
                             <td>{{ materiau.faceOptions }}</td>
+
                             <td>
                                 <button class="button-icon" (click)="updateMatiere(materiau)" title="Modifier">
                                     <fa-icon [icon]="['fas', 'edit']" class="fa-icon"></fa-icon>

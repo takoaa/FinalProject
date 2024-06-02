@@ -13,11 +13,11 @@ export class AuthService {
 
   login(token: string): void {
     localStorage.setItem('jwt', token);
-    this.loggedInStatus.next(true);
+    this.loggedInStatus.next(true);  // Immediately updates the status
   }
 
   logout(): void {
     localStorage.removeItem('jwt');
-    this.loggedInStatus.next(false);
+    this.loggedInStatus.next(false);  // Immediately updates the status
   }
 }

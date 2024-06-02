@@ -1,19 +1,22 @@
 .nav-items {
   padding-top: 40px;
+  font-family: Arial, sans-serif; /* Standard font for better readability */
 }
 
 .nav-item {
   padding: 25px 50px;
   cursor: pointer;
-  background-color: #cd0429;
+  background-color: #cd0429; /* Vibrant red background */
   border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
 .nav-item:hover {
-  background-color: #78686a;/* Slightly darker red for hover effect */
+  background-color: #a0281c; /* Darker shade for hover effect */
 }
+
 .nav-item div {
-  display: none; /* Hide the dropdown by default */
+  display: none; /* Keeps the dropdown hidden initially */
   padding: 5px 0;
   display: flex;
   flex-direction: column;
@@ -21,17 +24,54 @@
 }
 
 .nav-item div[ng-reflect-ng-if="true"] {
-  display: block; /* Show the children when they should be visible */
+  display: block; /* Shows the dropdown when activated */
 }
+
+
+.nav-child:hover {
+  background-color:   #F9F4EE; /* Slightly darker shade on hover for feedback */
+  transform: translateY(-2px); /* Subtle lift effect on hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
 
 .nav-child {
   margin-top: 10px;
-  background-color: #e0e0e0;
+  background-color: #F9F4EE; /* Soft blue-grey background for a soothing look */
   border: none;
-  padding: 5px;
+  padding: 10px 20px; /* Increased padding for a better clickable area */
   cursor: pointer;
+  border-radius: 4px; /* Slightly rounded corners for a modern look */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions for visual feedback */
+  font-size: 14px; /* Larger font size for readability */
+  font-weight: 500; /* Medium font weight for clearer text */
+  color: #333; /* Darker text color for better contrast */
+  text-align: left; /* Align text to the left for consistency */
+}
+.btn {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+ width: auto;
+  color: #333; /* Default text color */
+  border: none;
+  padding: 6px 16px;
+  font-size: 14px;
+  transition: background-color 0.2s, transform 0.2s; /* Smooth transitions for interaction */
+  border-radius: 4px; /* Rounded corners for buttons */
 }
 
+
+/* Adding an extra visual cue for clickable items */
+.fa-icon {
+  margin-right: 10px; /* Space between icon and text */
+  opacity: 0.9; /* Slightly transparent for a softer look */
+  transition: opacity 0.2s ease;
+}
+
+.fa-icon:hover {
+  opacity: 1; /* Full opacity on hover for focus */
+}
 /* Responsive adjustments */
 @media only screen and (max-width: 1300px) {
   .nav-item {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter, take } from 'rxjs/operators';
 import { AuthService } from './auth-service.service';
 
 @Injectable({
@@ -13,9 +13,11 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
+  ): Observable<boolean> {
     return this.authService.isLoggedIn.pipe(
-      map((isLoggedIn: boolean) => {
+      filter(isLoggedIn => isLoggedIn !== null),  // Wait until the login status is clearly true or false
+      take(1),  // Take only the first emitted value that is not null
+      map(isLoggedIn => {
         if (!isLoggedIn) {
           this.router.navigate(['/login']);
           return false;

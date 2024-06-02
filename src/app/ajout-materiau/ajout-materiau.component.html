@@ -13,8 +13,8 @@
             <div class="form-field">
                 <label>Catégorie du Matériau</label>
                 <mat-form-field appearance="fill">
-                    <input matInput [(ngModel)]="data.materiau['type']" name="type" required>
-                    <mat-error *ngIf="form.submitted && form.controls['type']?.invalid">Ce champ est requis</mat-error>
+                    <input matInput [(ngModel)]="data.materiau['type']" name="type">
+
                 </mat-form-field>
             </div>
 
@@ -60,9 +60,10 @@
                 <label>Code Tarifaire</label>
                 <mat-form-field appearance="fill">
                     <input matInput [(ngModel)]="data.materiau['codeTar']" name="codeTar" required
-                        pattern="^[a-zA-Z0-9]{4,10}$" minlength="4" maxlength="10" #codeTar="ngModel">
-                    <mat-error *ngIf="form.submitted && codeTar.invalid">Le code tarifaire est requis, doit être
-                        alphanumérique, et comporter entre 4 et 10 caractères</mat-error>
+                        pattern="^[a-zA-Z0-9]{4,8}$" minlength="4" maxlength="8" #codeTar="ngModel">
+                    <mat-error *ngIf="form.submitted && codeTar.invalid">
+                        Le code tarifaire est requis, doit comporter entre 4 et 8 caractères
+                    </mat-error>
                 </mat-form-field>
             </div>
 
@@ -83,7 +84,8 @@
         <mat-dialog-actions align="end">
 
             <button mat-raised-button color="primary" type="submit">Ajouter</button>
-            <button mat-button (click)="closeDialog()">Annuler</button>
+            <button mat-button (click)="closeDialog()" type="button">Annuler</button>
+
         </mat-dialog-actions>
     </form>
 </div>

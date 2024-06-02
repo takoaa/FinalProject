@@ -1,20 +1,25 @@
 <div class="product-form">
     <h2>Ajouter une nouvelle Forme</h2>
-    <form (ngSubmit)="submitForm(nom.value, description.value, avatar.files ? avatar.files[0] : null)">
+    <form (ngSubmit)="submitForm(form)" #form="ngForm">
+        <mat-dialog-content class="form-content">
+            <div class="form-field">
+                <label>Nom de la Forme</label>
+                <mat-form-field appearance="fill">
+                    <input matInput [(ngModel)]="data.forme.name" name="name" required>
+                    <mat-error *ngIf="form.submitted && form.controls['name']?.invalid">Ce champ est requis</mat-error>
+                </mat-form-field>
+            </div>
 
-        <div>
-            <label for="nom">Nom:</label>
-            <input id="nom" name="nom" #nom required>
-        </div>
-        <div>
-            <label for="description">Description:</label>
-            <input id="description" type="text" name="description" #description required>
-        </div>
+            <div class="form-field">
+                <label>Image</label>
+                <input type="file" (change)="onFileSelected($event)" required>
+                <mat-error *ngIf="form.submitted && !selectedFile">Ce champ est requis</mat-error>
+            </div>
+        </mat-dialog-content>
 
-        <div>
-            <input type="file" id="avatar" name="avatar" #avatar accept="image/png, image/jpeg" />
-        </div>
-        <button type="submit">Ajouter</button>
-        <button type="button" (click)="closeDialog()">Close</button>
+        <mat-dialog-actions align="end">
+            <button mat-raised-button color="primary" type="submit">Ajouter</button>
+            <button mat-button (click)="closeDialog()">Annuler</button>
+        </mat-dialog-actions>
     </form>
 </div>

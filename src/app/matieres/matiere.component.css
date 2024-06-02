@@ -27,25 +27,6 @@
 .product-list:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
-.product-list table {
-    width: 100%; /* Ensure the table uses full width of its container */
-    border-collapse: collapse; /* Optional: ensures borders between cells are shared */
-}
-
-.product-list th, .product-list td {
-    text-align: center; /* Centers text horizontally */
-    vertical-align: middle; /* Centers text vertically */
-    padding: 8px; /* Adds padding around text */
-}
-
-/* If your table headers (th) need specific styling */
-.product-list th {
-    background-color: #f4f4f4; /* Light grey background */
-    color: #333; /* Dark text for better readability */
-    font-weight: bold; /* Makes header text bold */
-}
-
-
 
 
 
@@ -167,4 +148,14 @@ button {
     font-size: 16px; /* Font size */
     text-align: center; /* Center align text */
     border-radius: 4px; /* Rounded corners */
+}
+ table {
+  width: 100%;
+  table-layout: fixed; /* This helps in maintaining uniform column width */
+}
+
+th, td {
+  text-align: left; /* Adjust text alignment as needed */
+  padding: 5px; /* Ensure padding is uniform */
+ vertical-align: center;
 }

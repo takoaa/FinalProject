@@ -1,8 +1,8 @@
 import { Component, OnInit  } from '@angular/core';
-import { Router } from '@angular/router'; // Import Router
-import { JwtService } from '../jwt.service'; // Adjust the path based on your project structure
-import { faTachometerAlt, faWrench, faCircle, faShapes, faPaintRoller, faPhone, faQuestionCircle, faCog,faChartLine  } from '@fortawesome/free-solid-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core'; // Import IconProp
+import { Router } from '@angular/router';
+import { JwtService } from '../jwt.service';
+import { faTachometerAlt, faWrench, faCircle, faShapes, faPaintRoller, faPhone, faQuestionCircle, faCog, faChartLine, faPalette  } from '@fortawesome/free-solid-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-side-nav',
@@ -17,40 +17,37 @@ export class SideNavComponent implements OnInit {
   faPaintRoller: IconProp = faPaintRoller;
   faPhone: IconProp = faPhone;
   faQuestionCircle: IconProp = faQuestionCircle;
-  faCog: IconProp = faCog; // Properly typed now
-  faChartLine:IconProp=faChartLine;
+  faCog: IconProp = faCog;
+  faChartLine: IconProp = faChartLine;
+  faPalette : IconProp =   faPalette;
   showChildren: boolean = false;
   showSubmenu: { [key: string]: boolean } = {};
   message: string | undefined;
 
-
-
-  constructor(private router: Router, private service: JwtService) {}
-
+  constructor(private router: Router, private jwtService: JwtService) {}
+ 
   ngOnInit(): void {
-    this.hello(); // Call hello function on initialization
+    this.hello();
   }
 
-  // Navigation method to be called on click, replaces routerLink alternatives
   navigate(path: string, event: MouseEvent): void {
-    event.stopPropagation(); // Prevents the menu from collapsing
-    this.router.navigate([path]); // Navigate programmatically
+    event.stopPropagation();
+    this.router.navigate([path]);
   }
 
   toggleChildren(event: MouseEvent): void {
-    event.stopPropagation(); // Prevents the event from bubbling up
-    this.showChildren = !this.showChildren; // Toggle visibility of children menu
+    event.stopPropagation();
+    this.showChildren = !this.showChildren;
   }
 
   toggleSubmenu(event: MouseEvent, submenuKey: string): void {
-    event.stopPropagation(); // Prevents the event from bubbling up to toggleChildren
+    event.stopPropagation();
     this.showSubmenu = {
       ...this.closeAllSubmenusExcept(submenuKey),
-      [submenuKey]: !this.showSubmenu[submenuKey] // Toggle the specific submenu
+      [submenuKey]: !this.showSubmenu[submenuKey]
     };
   }
 
-  // Closes all submenus except the one currently being toggled
   closeAllSubmenusExcept(submenuKey: string): { [key: string]: boolean } {
     const newSubmenuState: { [key: string]: boolean } = {};
     Object.keys(this.showSubmenu).forEach(key => {
@@ -59,14 +56,13 @@ export class SideNavComponent implements OnInit {
     return newSubmenuState;
   }
 
-  // Prevent default action and stop propagation to maintain the state of the menu
+
   childClicked(event: MouseEvent): void {
-    console.log('Child button clicked');
-    event.stopPropagation(); // Stops the click from triggering toggleChildren
+    event.stopPropagation();
   }
 
   hello(): void {
-    this.service.hello().subscribe(
+    this.jwtService.hello().subscribe(
       (response) => {
         console.log(response);
         this.message = response.message;
@@ -76,8 +72,8 @@ export class SideNavComponent implements OnInit {
       }
     );
   }
+
   navigateToDashboard(): void {
-    // Trigger a full page reload
     window.location.href = '/dashboard';
   }
 }

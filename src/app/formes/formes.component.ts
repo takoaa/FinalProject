@@ -1,60 +1,68 @@
-
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-
-
-import { Observable, Subscription } from 'rxjs';
-
-import { MatTableDataSource } from '@angular/material/table';
-import { Forme } from '../models/forme';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 import { FormesService } from '../formes.service';
+import { Forme } from '../models/forme';
 import { AjoutFormesComponent } from '../ajout-formes/ajout-formes.component';
-
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-formes',
   templateUrl: './formes.component.html',
-  styleUrl: './formes.component.css'
+  styleUrls: ['./formes.component.css']
 })
-export class FormesComponent  implements OnInit {
-  isVisible: boolean = true;  // Declare and initialize isVisible
-  formes$: Observable<Forme[]> = this.formesService.getFormes();
- 
+export class FormesComponent implements OnInit {
+  formes$!: Observable<Forme[]>;
+
   constructor(
-    private route: ActivatedRoute,
- 
+    library: FaIconLibrary,
     private formesService: FormesService,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) { library.addIcons(faEdit, faTrashAlt); }
 
   ngOnInit(): void {
-    this.formes$ = this.formesService.getFormes(); // Subscribe to the observable to fetch formes
+    this.loadInitialData();
+  }
 
-    // Use route parameters to possibly filter or initiate specific actions
-    this.route.queryParams.subscribe(params => {
-      if (params['nom'] && params['description']) {
-        const forme: Forme = {
-          id: params['id'],
-          nom: params['nom'],
-          description: params['description'],
+  loadInitialData(): void {
+    this.formes$ = this.formesService.getFormes();
+  }
 
-          image: params['image'] || undefined
-        };
-        this.formesService.addForme(forme); // Add new forme via service if route params exist
+  openDialog(forme?: Forme): void {
+    const dialogRef = this.dialog.open(AjoutFormesComponent, {
+      width: '300px',
+      data: { forme: forme || this.createNewForme() }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadInitialData();
       }
     });
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AjoutFormesComponent, {
-      width: '250px'
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      
-    });
+  createNewForme(): Forme {
+    return {
+      id: undefined,
+      name: '',
+      image: undefined
+    };
   }
 
+  updateForme(forme: Forme): void {
+    this.openDialog(forme);
   }
 
+  deleteForme(id: number): void {
+    this.formesService.deleteForm(id).subscribe({
+      next: () => {
+        this.snackBar.open('Forme supprimée avec succès', 'Fermé', { duration: 6000 });
+        this.loadInitialData();
+      },
+      error: (error) => this.snackBar.open('Échec de la suppression de la forme: ' + error.message, 'Fermé', { duration: 1000 })
+    });
+  }
+}
