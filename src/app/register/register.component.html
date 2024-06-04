@@ -28,7 +28,13 @@
 
         <div class="form-group">
             <label for="password">Mot de passe</label>
-            <input type="password" class="form-control" id="password" formControlName="password" />
+            <div class="input-group">
+                <input [type]="hidePassword ? 'password' : 'text'" class="form-control" id="password"
+                    formControlName="password" />
+                <button type="button" (click)="togglePasswordVisibility()">
+                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </div>
             <div
                 *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
                 <small class="text-danger" *ngIf="registerForm.controls['password'].errors?.['required']">
@@ -45,11 +51,17 @@
 
         <div class="form-group">
             <label for="confirmPassword">Confirmé le Mot de passe</label>
-            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" />
+            <div class="input-group">
+                <input [type]="hideConfirmPassword ? 'password' : 'text'" class="form-control" id="confirmPassword"
+                    formControlName="confirmPassword" />
+                <button type="button" (click)="toggleConfirmPasswordVisibility()">
+                    <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </div>
             <div
                 *ngIf="registerForm.controls['confirmPassword'].invalid && (registerForm.controls['confirmPassword'].dirty || registerForm.controls['confirmPassword'].touched)">
                 <small class="text-danger" *ngIf="registerForm.controls['confirmPassword'].errors?.['required']">
-                    Ce champ est ressssquis
+                    Ce champ est requis
                 </small>
                 <small class="text-danger"
                     *ngIf="registerForm.controls['confirmPassword'].errors?.['passwordMismatch']">

@@ -16,6 +16,12 @@ export class LoginComponent implements OnInit {
     private service: JwtService,
     private router: Router
   ) {}
+  hide = true;
+
+  toggleVisibility() {
+      this.hide = !this.hide;
+  }
+  
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -29,6 +35,8 @@ export class LoginComponent implements OnInit {
         (response: { jwt: string }) => {
           if (response.jwt) {
             localStorage.setItem('jwt', response.jwt);
+            this.router.navigateByUrl('/dashboard');
+            alert("bienvenue ");
             this.router.navigateByUrl('/dashboard');
           }
         },

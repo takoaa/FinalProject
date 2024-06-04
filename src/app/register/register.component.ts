@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router'; // Importer Router
 import { JwtService } from '../jwt.service';
 
 @Component({
@@ -10,10 +11,12 @@ import { JwtService } from '../jwt.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string = '';
-
+  hidePassword: boolean = true;
+  hideConfirmPassword: boolean = true;
   constructor(
     private service: JwtService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router // Injecter le Router ici
   ) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -33,19 +36,26 @@ export class RegisterComponent implements OnInit {
     } else {
       formGroup.get('confirmPassword')?.setErrors(null);
     }
+  } togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
+
+  toggleConfirmPasswordVisibility() {
+    this.hideConfirmPassword = !this.hideConfirmPassword;
+  }
+
 
   submitForm(): void {
     if (this.registerForm.valid) {
       this.service.register(this.registerForm.value).subscribe(
         (response) => {
           if (response.id != null) {
-            alert("Hello " + response.name);
+            alert("Bienvenue " + response.name);
+            this.router.navigate(['/login']); 
           }
         },
         (error: any) => {
           this.errorMessage = 'Compte existe.';
-         
         }
       );
     }
